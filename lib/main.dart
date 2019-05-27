@@ -43,31 +43,41 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Container(
         child: FutureBuilder<List<Koineks>>(
-          future: fetchKoineks(),
-          builder: createListView,
-        ),
+            future: fetchKoineks(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Koineks>> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return Text('Press button to start.');
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return Text('Awaiting result...');
+                case ConnectionState.done:
+                  if (snapshot.hasError)
+                    return Text('Error: ${snapshot.error}');
+                  return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Column(
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(snapshot.data[index].name),
+                            trailing:
+                                Text(snapshot.data[index].current + " TRY"),
+                            subtitle: Text(snapshot.data[index].shortCode),
+                          ),
+                          Divider(
+                            height: 2.0,
+                          ),
+                        ],
+                      );
+                    },
+                  );
+              }
+              return null;
+            } // unreachable
+            ),
       ),
     );
   }
-}
-
-Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
-  List<Koineks> values = snapshot.data;
-  return ListView.builder(
-    itemCount: values.length,
-    itemBuilder: (BuildContext context, int index) {
-      return Column(
-        children: <Widget>[
-          ListTile(
-            title: Text(values[index].name),
-            trailing: Text(values[index].current + " TRY"),
-            subtitle: Text(values[index].shortCode),
-          ),
-          Divider(
-            height: 2.0,
-          ),
-        ],
-      );
-    },
-  );
 }
