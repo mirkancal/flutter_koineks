@@ -1,4 +1,4 @@
-Small project to play with json decoding with build_runner and json_serializable.
+# Small project to play with json decoding with build_runner and json_serializable.
 
 API: <a href="https://koineks.com/ticker">koineks.com/ticker</a>
 
