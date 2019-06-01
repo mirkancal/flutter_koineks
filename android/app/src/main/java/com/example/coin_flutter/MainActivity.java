@@ -1,4 +1,4 @@
-package com.example.coin_flutter;
+package com.mirkolabs.coin_flutter;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

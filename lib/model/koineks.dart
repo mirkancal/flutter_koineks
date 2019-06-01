@@ -1,29 +1,64 @@
-import 'package:json_annotation/json_annotation.dart';
-
-/// This allows the `Koineks` class to access private members in
-/// the generated file. The value for this is *.g.dart, where
-/// the star denotes the source file name.
-part 'koineks.g.dart';
-
-/// An annotation for the code generator to know that this class needs the
-/// JSON serialization logic to be generated.
-@JsonSerializable()
 class Koineks {
-  Koineks(this.shortCode, this.name, this.current);
-
-  @JsonKey(name: 'short_code')
   String shortCode;
   String name;
+  String currency;
+  String open;
   String current;
+  String changeAmount;
+  String changePercentage;
+  String high;
+  String low;
+  String volume;
+  String ask;
+  String bid;
+  int timestamp;
 
-  /// A necessary factory constructor for creating a new User instance
-  /// from a map. Pass the map to the generated `_$KoineksFromJson()` constructor.
-  /// The constructor is named after the source class, in this case User.
-  factory Koineks.fromJson(Map<String, dynamic> json) =>
-      _$KoineksFromJson(json);
+  Koineks(
+      {this.shortCode,
+      this.name,
+      this.currency,
+      this.open,
+      this.current,
+      this.changeAmount,
+      this.changePercentage,
+      this.high,
+      this.low,
+      this.volume,
+      this.ask,
+      this.bid,
+      this.timestamp});
 
-  /// `toJson` is the convention for a class to declare support for serialization
-  /// to JSON. The implementation simply calls the private, generated
-  /// helper method `_$KoineksToJson`.
-  Map<String, dynamic> toJson() => _$KoineksToJson(this);
+  Koineks.fromJson(Map<String, dynamic> json) {
+    shortCode = json['short_code'];
+    name = json['name'];
+    currency = json['currency'];
+    open = json['open'];
+    current = json['current'];
+    changeAmount = json['change_amount'];
+    changePercentage = json['change_percentage'];
+    high = json['high'];
+    low = json['low'];
+    volume = json['volume'];
+    ask = json['ask'];
+    bid = json['bid'];
+    timestamp = json['timestamp'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['short_code'] = this.shortCode;
+    data['name'] = this.name;
+    data['currency'] = this.currency;
+    data['open'] = this.open;
+    data['current'] = this.current;
+    data['change_amount'] = this.changeAmount;
+    data['change_percentage'] = this.changePercentage;
+    data['high'] = this.high;
+    data['low'] = this.low;
+    data['volume'] = this.volume;
+    data['ask'] = this.ask;
+    data['bid'] = this.bid;
+    data['timestamp'] = this.timestamp;
+    return data;
+  }
 }
