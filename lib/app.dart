@@ -9,10 +9,10 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Türk Coin Borsası',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.blueAccent,
-        brightness: Brightness.dark,
-      ),
+          primarySwatch: Colors.blue,
+          accentColor: Colors.blueAccent,
+          brightness: Brightness.dark,
+          fontFamily: 'Lato'),
       home: MyHomePage(),
     );
   }
