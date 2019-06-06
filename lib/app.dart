@@ -1,6 +1,6 @@
+import 'package:coin_flutter/bloc/coin_bloc_provider.dart';
 import 'package:coin_flutter/widget/coin_rates.dart';
 import 'package:flutter/material.dart';
-import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 
 class App extends StatelessWidget {
   @override
@@ -10,6 +10,7 @@ class App extends StatelessWidget {
       title: 'Türk Coin Borsası',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        accentColor: Colors.blueAccent,
         brightness: Brightness.dark,
       ),
       home: MyHomePage(),
@@ -31,12 +32,6 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           flexibleSpace: SafeArea(
             child: TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicator: BubbleTabIndicator(
-                indicatorHeight: 25.0,
-                indicatorColor: Colors.blueAccent,
-                tabBarIndicatorSize: TabBarIndicatorSize.tab,
-              ),
               tabs: <Widget>[
                 Tab(text: "koineks"),
                 Tab(text: "paribu"),
@@ -46,12 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: TabBarView(
           children: <Widget>[
-            CoinRates(
-              coinMarket: 'koineks',
+            CoinBlocProvider(
+              child: CoinRates('koineks'),
             ),
-            CoinRates(
-              coinMarket: 'paribu',
-            ),
+            CoinBlocProvider(
+              child: CoinRates('paribu'),
+            )
           ],
         ),
       ),
